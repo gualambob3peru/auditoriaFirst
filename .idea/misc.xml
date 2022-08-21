@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1325" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1325" />
+        <entry key="app/src/main/res/layout/activity_categoria_producto.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_categoria_productos.xml" value="0.21875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_medicion.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_negocio.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_negocio_categoria.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/activity_negocio_detalle.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/card_categoria_producto_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/card_negocio_categoria_layout.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/card_negocio_layout.xml" value="0.24003623188405798" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.23278985507246377" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
