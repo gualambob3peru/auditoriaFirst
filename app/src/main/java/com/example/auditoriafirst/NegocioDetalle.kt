@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import com.example.auditoriafirst.data.Database.AuditoriaDb
 import com.example.auditoriafirst.data.Entities.Negocio
+import com.example.auditoriafirst.data.Entities.Producto
 import com.example.auditoriafirst.services.negocio.NegocioInput
 import com.example.auditoriafirst.services.negocio.NegocioResponse
 import com.example.auditoriafirst.services.negocio.NegocioService
@@ -19,6 +21,8 @@ class NegocioDetalle : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_negocio_detalle)
+
+        val db = AuditoriaDb(this)
 
         val negocio_activity = Intent(this, negocio::class.java)
 
@@ -52,8 +56,53 @@ class NegocioDetalle : AppCompatActivity() {
                         if(negocio.error.equals("0")){
 
                             lifecycleScope.launch{
+                                //Limpiando como nuevo
+                                db.ProductoDao().borrarAll(cod_negocio.toString())
+
+                                db.NegocioDao().insert(Negocio(
+                                    0,
+                                    negocio.body.cod_negocio,
+                                    negocio.body.direccion,
+                                    "",
+                                    "",
+                                    negocio.body.cod_zona,
+                                    negocio.body.cod_distrito,
+                                    negocio.body.cod_canal
+                                ))
+
+                                //Productos
+                                var categorias = negocio.body.categorias
+
+                                for(cate in categorias){
+
+                                    for(producto in cate.productos){
+                                        db.ProductoDao().insert(
+                                            Producto(
+                                                0,
+                                                producto.sku,
+                                                producto.cod_categoria,
+                                                negocio.body.cod_negocio,
+                                                producto.descripcion,
+                                                "",
+                                                "",
+                                                "",
+                                                "",
+                                                "",
+                                                cate.descripcion,
+                                                producto.vant
+
+                                            )
+                                        )
+                                    }
+
+                                }
+
+
+                                //////////////
                                 negocio_activity.putExtra("medicion","2207")
                                 startActivity(negocio_activity)
+
+
                             }
                         }else if(negocio.error.equals("1")){
                             //txtMensajeBusqueda.text = "Medición no encontrada"

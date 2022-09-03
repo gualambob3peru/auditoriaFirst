@@ -14,6 +14,21 @@
         android:theme="@style/Theme.AuditoriaFirst"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AgregarProdDetallesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarProdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarCategoriaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarNegocioActivity"
+            android:exported="false" />
+        <activity
             android:name=".CategoriaProductoActivity"
             android:exported="false" />
         <activity

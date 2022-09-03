@@ -6,14 +6,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.auditoriafirst.adapter.NegocioAdapter
+import com.example.auditoriafirst.data.Database.AuditoriaDb
 import com.example.auditoriafirst.data.Entities.Negocio
-import com.example.auditoriafirst.services.medicion.CategoriaInput
-import com.example.auditoriafirst.services.medicion.CategoriaResponse
-import com.example.auditoriafirst.services.medicion.MedicionService
+import com.example.auditoriafirst.data.Entities.Producto
+import com.example.auditoriafirst.services.medicion.*
 import com.example.auditoriafirst.services.negocio.NegocioInput
 import com.example.auditoriafirst.services.negocio.NegocioResponse
 import com.example.auditoriafirst.services.negocio.NegocioService
@@ -21,11 +22,17 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.auditoriafirst.shared.UsuarioApplication.Companion.prefs
 
 class negocio : AppCompatActivity() {
+    var usuario = prefs.getUsuario()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_negocio)
+
+        val db = AuditoriaDb(this)
+
 
         var medicion = intent.getStringExtra("medicion")
         val txtNumMedicion = findViewById<TextView>(R.id.txtNumMedicion)
@@ -33,80 +40,58 @@ class negocio : AppCompatActivity() {
 
         val negocio_detalle_activity = Intent(this, NegocioDetalle::class.java)
         val negocio_categoria_activity = Intent(this, NegocioCategoria::class.java)
+        val agregar_negocio_activity = Intent(this, AgregarNegocioActivity::class.java)
 
         val btnBuscarNegocio = findViewById<Button>(R.id.btnBuscarNegocio)
         val inputBuscarNegocio = findViewById<EditText>(R.id.inputBuscarNegocio)
-
+        val tMensajeBusqueda = findViewById<TextView>(R.id.tMensajeBusqueda)
+        val btnAgregarNegocio = findViewById<Button>(R.id.btnAgregarNegocio)
 
         val medicionInput = CategoriaInput(medicion.toString())
 
-        var service = MedicionService.create()
-        var apiInterface = service.medicion(medicionInput)
-        apiInterface.enqueue( object : Callback<CategoriaResponse>
-        {
-            override fun onResponse(
-                call: Call<CategoriaResponse>,
-                response: Response<CategoriaResponse>
-            ) {
-                var medicion = response.body()
+        lifecycleScope.launch{
+            var negocios = db.NegocioDao().getAll()
 
-                if (medicion != null) {
-                    if(medicion.error.equals("0")){
+            if(negocios !=null){
+                var arr_codigo : MutableList<String> = mutableListOf()
+                var arr_descripcion : MutableList<String> = mutableListOf()
+                var arr_negocio : MutableList<Negocio> = mutableListOf()
 
-                        lifecycleScope.launch{
+                for(negocio in negocios){
+                    arr_codigo.add(negocio.codigo_negocio)
+                    arr_descripcion.add(negocio.descripcion) // -->> Direccion
+                    var n_negocio= Negocio(0,negocio.codigo_negocio,negocio.descripcion)
+                    arr_negocio.add(n_negocio)
+                }
 
-                            var medi = medicion.body
-                            if (medi != null) {
-                                var arr_codigo : MutableList<String> = mutableListOf()
-                                var arr_descripcion : MutableList<String> = mutableListOf()
-                                var arr_negocio : MutableList<Negocio> = mutableListOf()
+                var adapter = NegocioAdapter()
+                adapter.setList(arr_codigo,arr_descripcion,arr_negocio)
 
-
-                                for(negocio in medi.negocios){
-                                    arr_codigo.add(negocio.cod_negocio)
-                                    arr_descripcion.add(negocio.direccion)
-                                    var n_negocio= Negocio(negocio.id,negocio.cod_negocio,negocio.direccion,"2")
-                                    arr_negocio.add(n_negocio)
-                                }
-
-
-                                var adapter = NegocioAdapter()
-                                adapter.setList(arr_codigo,arr_descripcion,arr_negocio)
-
-                                adapter.onItemClick = { pro,codigo_negocio,descripcion_negocio ->
-                                    negocio_categoria_activity.putExtra("cod_negocio",codigo_negocio.text)
-                                    negocio_categoria_activity.putExtra("descripcion_negocio",descripcion_negocio.text)
-                                    startActivity(negocio_categoria_activity)
-                                   /* prefs.setFechaVisita(pro.fecha_mes)
-                                    intentoLocales.putExtra("idProgramacion",pro.id)
-                                    negocio_categoria_activity.putExtra("tNombreRutaLocal",pro.r_descripcion)
-                                    negocio_categoria_activity.putExtra("tFechaRutaLocal",pro.fecha_visita)
-                                    startActivity(negocio_categoria_activity)*/
-                                }
-
-                                val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(applicationContext)
-                                var recyclerView = findViewById<RecyclerView>(R.id.recyclerViewNegocio)
-                                recyclerView.layoutManager = linearLayoutManager
-                                recyclerView.adapter = adapter
-                            }
-
-
-                        }
-                    }else if(medicion.error.equals("1")){
-                       // txtMensajeBusqueda.text = "Medición no encontrada"
+                adapter.onItemClick = { pro,codigo_negocio,descripcion_negocio ->
+                    negocio_categoria_activity.putExtra("cod_negocio",codigo_negocio.text)
+                    negocio_categoria_activity.putExtra("descripcion_negocio",descripcion_negocio.text)
+                    startActivity(negocio_categoria_activity)
+                }
+                adapter.onEnviarClick = {miNegocio ->
+                    lifecycleScope.launch{
+                        var productos = db.ProductoDao().getAllProductos_negocio(miNegocio.codigo_negocio)
+                        subirProductos(productos)
                     }
 
                 }
 
-               // btnBuscarMedicion.isEnabled= true
-            }
+                val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(applicationContext)
+                var recyclerView = findViewById<RecyclerView>(R.id.recyclerViewNegocio)
+                recyclerView.layoutManager = linearLayoutManager
+                recyclerView.adapter = adapter
 
-            override fun onFailure(call: Call<CategoriaResponse>, t: Throwable) {
-                //btnBuscarMedicion.isEnabled= true
-                TODO(t.toString() + "fff")
+            }else{
+                //No tiene ningun negocio
             }
+        }
 
-        })
+
+
 
         btnBuscarNegocio.setOnClickListener {
             if(inputBuscarNegocio.text.toString().equals("") ){
@@ -136,7 +121,7 @@ class negocio : AppCompatActivity() {
                                     startActivity(negocio_detalle_activity)
                                 }
                             }else if(negocio.error.equals("1")){
-                                //txtMensajeBusqueda.text = "Medición no encontrada"
+                                tMensajeBusqueda.text = negocio.messages
                             }
 
                         }
@@ -152,5 +137,65 @@ class negocio : AppCompatActivity() {
                 })
             }
         }
+
+        btnAgregarNegocio.setOnClickListener {
+            startActivity(agregar_negocio_activity)
+        }
+
+
     }
+
+    private fun subirProductos(productos: List<Producto>) {
+        var datosSubida = mutableMapOf<String,String>()
+        datosSubida["email"] = usuario["email"].toString()
+        datosSubida["medicion"] = prefs.getUsuario()["medicion"].toString()
+        datosSubida["anio"] = prefs.getUsuario()["anio"].toString()
+        datosSubida["mes"] = prefs.getUsuario()["mes"].toString()
+
+
+        val productoSubirInput = ProductoSubirInput(productos,datosSubida)
+
+        var service = ProductoService.create()
+        var apiInterface = service.subir(productoSubirInput)
+        apiInterface.enqueue( object : Callback<ProductoSubirResponse>
+        {
+            override fun onResponse(
+                call: Call<ProductoSubirResponse>,
+                response: Response<ProductoSubirResponse>
+            ) {
+                var todo = response.body()
+                Toast.makeText(applicationContext,"Productos Enviados",Toast.LENGTH_SHORT).show()
+            }
+            override fun onFailure(call: Call<ProductoSubirResponse>, t: Throwable) {
+                //btnBuscarMedicion.isEnabled= true
+                TODO(t.toString() + "fff")
+            }
+
+        })
+    }
+
+    /*private fun subirProductos(productos: List<Producto>) {
+        var datosSubida = object {
+            "usuarioEmail" =
+        }
+
+        val productoSubirInput = ProductoSubirInput(productos)
+
+        var service = ProductoService.create()
+        var apiInterface = service.subir(productoSubirInput)
+        apiInterface.enqueue( object : Callback<ProductoSubirResponse>
+        {
+            override fun onResponse(
+                call: Call<ProductoSubirResponse>,
+                response: Response<ProductoSubirResponse>
+            ) {
+
+            }
+            override fun onFailure(call: Call<ProductoSubirResponse>, t: Throwable) {
+                //btnBuscarMedicion.isEnabled= true
+                TODO(t.toString() + "fff")
+            }
+
+        })
+    }*/
 }

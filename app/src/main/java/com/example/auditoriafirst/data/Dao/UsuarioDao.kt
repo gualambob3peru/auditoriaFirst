@@ -14,6 +14,9 @@ interface UsuarioDao {
     @Query("SELECT * from Usuario WHERE id = :id")
     suspend fun get(id: Int): Usuario
 
+    @Query("SELECT * from Usuario WHERE email = :email")
+    suspend fun get_email(email: String): Usuario
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(usuario: List<Usuario>)
 

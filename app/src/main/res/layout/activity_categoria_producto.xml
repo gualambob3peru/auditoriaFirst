@@ -6,26 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".CategoriaProductoActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Productos"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnGuardar"
+            android:layout_width="28dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/save" />
+
+
+        <ImageView
+            android:id="@+id/btnAgregarProd"
+            android:layout_width="28dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="92dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/layer_plus" />
+
+        <ImageView
+            android:id="@+id/btnAtras"
+            android:layout_width="28dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/btnAgregarProducto"
+            android:layout_width="28dp"
+            android:layout_height="46dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.861"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/plus" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCategoriaProductoView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginBottom="48dp"
-        android:text="Productos"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerCategoriaProductoView"
+        android:layout_marginTop="104dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!--
+       <Button
+           android:id="@+id/btnGuardar2"
+           android:layout_width="114dp"
+           android:layout_height="37dp"
+           android:layout_marginTop="60dp"
+           android:layout_marginEnd="16dp"
+           android:text="Guardar"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
+
+           <Button
+               android:id="@+id/btnAgregarProducto2"
+               android:layout_width="136dp"
+               android:layout_height="37dp"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="156dp"
+               android:text="+ Nuevo"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+               -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

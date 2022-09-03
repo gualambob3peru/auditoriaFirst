@@ -16,8 +16,8 @@ interface LoginService {
 
     companion object {
 
-        var BASE_URL = "http://192.168.3.5/auditoria/public_auditoria/auditoria/api/login/"
-
+        //var BASE_URL = "http://192.168.3.5/auditoria/public_auditoria/auditoria/api/login/"
+        var BASE_URL = "http://damer.b3peru.com/api/login/"
         fun create() : LoginService {
 
             val retrofit = Retrofit.Builder()

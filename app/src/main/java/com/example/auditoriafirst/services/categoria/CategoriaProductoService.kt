@@ -15,8 +15,8 @@ interface CategoriaProductoService {
 
     companion object {
 
-        var BASE_URL = "http://192.168.3.5/auditoria/public_auditoria/auditoria/api/categoriaApi/"
-
+        //var BASE_URL = "http://192.168.3.5/auditoria/public_auditoria/auditoria/api/categoriaApi/"
+        var BASE_URL = "http://damer.b3peru.com/api/categoriaApi/"
         fun create() : CategoriaProductoService {
 
             val retrofit = Retrofit.Builder()

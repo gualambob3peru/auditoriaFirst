@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 data class NegocioResponse(
     @SerializedName("status") var status: String,
     @SerializedName("error") var error: String,
-    @SerializedName("body") var body: NegocioModel,
-    @SerializedName("messages") var message: String
+    @SerializedName("body") var body: NegocioModel = NegocioModel(),
+    @SerializedName("messages") var messages: String
 )
 

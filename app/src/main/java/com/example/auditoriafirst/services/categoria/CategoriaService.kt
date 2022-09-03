@@ -12,11 +12,15 @@ interface CategoriaService {
     @POST("medicion")
     fun medicion(@Body MedicionInput: CategoriaInput): Call<CategoriaResponse>
 
+    @Headers("Content-Type: application/json")
+    @POST("categorias")
+    fun categorias(): Call<CategoriaResponse>
+
 
     companion object {
 
-        var BASE_URL = "http://192.168.3.5/auditoria/public_auditoria/auditoria/api/medicion/"
-
+        // var BASE_URL = "http://192.168.3.5/auditoria/public_auditoria/auditoria/api/categoriaApi/"
+        var BASE_URL = "http://damer.b3peru.com/api/categoriaApi/"
         fun create() : CategoriaService {
 
             val retrofit = Retrofit.Builder()

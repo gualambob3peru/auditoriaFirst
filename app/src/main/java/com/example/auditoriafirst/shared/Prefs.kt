@@ -24,6 +24,10 @@ class Prefs(val context:Context) {
         storage.edit().putString("apellidoMaterno",usuario["apellidoMaterno"]).apply()
         storage.edit().putString("email",usuario["email"]).apply()
         storage.edit().putString("telefono",usuario["telefono"]).apply()
+        storage.edit().putString("medicion",usuario["medicion"]).apply()
+        storage.edit().putString("anio",usuario["anio"]).apply()
+        storage.edit().putString("mes",usuario["mes"]).apply()
+        storage.edit().putString("contrasena",usuario["contrasena"]).apply()
     }
 
     fun getUsuario(): MutableMap<String,String> {

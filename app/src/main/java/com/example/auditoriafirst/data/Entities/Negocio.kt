@@ -6,8 +6,14 @@ import androidx.room.PrimaryKey
 @Entity
 data class Negocio (
     @PrimaryKey(autoGenerate = true)
-    val id: String = "",
+    val id: Int,
     val codigo_negocio: String = "",
     val descripcion: String = "",
+    val vendedor : String = "",
+    val telefono : String = "",
+    val zona : String = "",
+    val distrito : String ="",
+    val canal : String ="",
+    val nombre : String ="",
     val estado: String = ""
 )

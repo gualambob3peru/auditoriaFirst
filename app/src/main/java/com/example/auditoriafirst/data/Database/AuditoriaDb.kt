@@ -9,12 +9,26 @@ import com.example.auditoriafirst.data.Entities.*
 @Database(entities = [
 
     Usuario::class,
+    Producto::class,
+    ProductoMaster::class,
+    Negocio::class,
+    Categoria::class,
+    Canal::class,
+    Zona::class,
+    Distrito::class
 
                      ],
     version = 1,exportSchema=false)
 abstract class AuditoriaDb : RoomDatabase()  {
 
     abstract fun UsuarioDao(): UsuarioDao
+    abstract fun ProductoDao(): ProductoDao
+    abstract fun ProductoMasterDao(): ProductoMasterDao
+    abstract fun NegocioDao(): NegocioDao
+    abstract fun CategoriaDao(): CategoriaDao
+    abstract fun CanalDao(): CanalDao
+    abstract fun ZonaDao(): ZonaDao
+    abstract fun DistritoDao(): DistritoDao
 
 
     companion object {

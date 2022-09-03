@@ -7,4 +7,8 @@ class ProductoModel {
     var sku: String = ""
     var cod_categoria: String = ""
     var descripcion : String =""
+    var vant : String = ""
+    var cod_distrito : String =""
+    var cod_canal : String =""
+    var cod_zona : String = ""
 }

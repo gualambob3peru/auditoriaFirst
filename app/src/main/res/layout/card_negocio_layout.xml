@@ -4,17 +4,17 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ruta_card_view"
-    android:layout_margin="12dp"
+    android:layout_margin="2dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="5dp"
     app:cardElevation="6dp"
-    app:contentPadding="4dp"
+    app:contentPadding="2dp"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/tCodigoProducto"
@@ -30,28 +30,30 @@
 
         <TextView
             android:id="@+id/tDescripcionProducto"
-            android:layout_width="wrap_content"
+            android:layout_width="271dp"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="20dp"
             android:text="Hola Hola"
             android:textColor="@color/black"
-            android:textSize="17dp">
+            android:textSize="14dp">
 
         </TextView>
 
         <Button
-            android:id="@+id/btnVerCate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="190dp"
-
-            android:text="Ver"></Button>
+            android:id="@+id/btnEnviar"
+            android:layout_width="74dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="290dp"
+            android:text="Enviar"
+            android:backgroundTint="#722891"
+            android:textSize="10dp" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
             android:text="Código : " />
     </RelativeLayout>
 

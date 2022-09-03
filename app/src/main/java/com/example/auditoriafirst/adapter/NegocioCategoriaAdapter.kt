@@ -39,15 +39,15 @@ class NegocioCategoriaAdapter:RecyclerView.Adapter<NegocioCategoriaAdapter.ViewH
         var itemCodigo: TextView
         var itemDescripcion:TextView
         var itemCategoria : Categoria
-        var itemButton : Button
+        //var itemButton : Button
 
         init{
             itemCodigo = itemView.findViewById(R.id.tCodigoProducto)
             itemDescripcion = itemView.findViewById(R.id.tDescripcionProducto)
             itemCategoria = Categoria()
-            itemButton = itemView.findViewById(R.id.btnVerCate)
+            //itemButton = itemView.findViewById(R.id.btnVerCate)
 
-            itemButton.setOnClickListener {
+            itemView.setOnClickListener {
                 onItemClick?.invoke(categorias[adapterPosition],itemCodigo,itemDescripcion)
             }
         }

@@ -14,6 +14,7 @@ class NegocioAdapter:RecyclerView.Adapter<NegocioAdapter.ViewHolder>() {
     var descripcions : MutableList<String> = mutableListOf()
     var buttons : MutableList<String> = mutableListOf()
     var onItemClick: ((Negocio,TextView,TextView) -> Unit)? = null
+    var onEnviarClick: ((Negocio) -> Unit)? = null
     var negocios : List<Negocio> = emptyList()
 
     fun setList(miList1: MutableList<String>,miList2: MutableList<String>,miList4:List<Negocio>){
@@ -44,11 +45,15 @@ class NegocioAdapter:RecyclerView.Adapter<NegocioAdapter.ViewHolder>() {
         init{
             itemCodigo = itemView.findViewById(R.id.tCodigoProducto)
             itemDescripcion = itemView.findViewById(R.id.tDescripcionProducto)
-            itemNegocio = Negocio()
-            itemButton = itemView.findViewById(R.id.btnVerCate)
+            itemNegocio = Negocio(0)
+            itemButton = itemView.findViewById(R.id.btnEnviar)
 
-            itemButton.setOnClickListener {
+            itemView.setOnClickListener {
                 onItemClick?.invoke(negocios[adapterPosition],itemCodigo,itemDescripcion)
+            }
+
+            itemButton.setOnClickListener{
+                onEnviarClick?.invoke(negocios[adapterPosition])
             }
         }
     }

@@ -4,27 +4,27 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ruta_card_view"
-    android:layout_margin="12dp"
+    android:layout_margin="2dp"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="5dp"
     app:cardElevation="6dp"
-    app:contentPadding="4dp"
+    app:contentPadding="1dp"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="137dp"
-        android:padding="16dp">
+        android:layout_height="105dp"
+        android:padding="3dp">
 
         <TextView
             android:id="@+id/tCodigoProducto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="250dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginStart="315dp"
+            android:layout_marginTop="10dp"
             android:text="2020-05-25"
             android:textColor="@color/black"
-            android:textSize="15dp">
+            android:textSize="10dp">
 
         </TextView>
 
@@ -33,23 +33,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="62dp"
             android:text="Hola Hola"
             android:textColor="@color/black"
-            android:textSize="13dp">
+
+            android:textSize="11dp">
 
         </TextView>
 
-        <Button
-            android:id="@+id/btnVerCate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="210dp"
-            android:layout_marginTop="15dp"
-            android:text="Guardar"></Button>
-
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/inputCompra"
             android:layout_width="58dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -57,7 +50,7 @@
             android:text="" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/inputInventario"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
@@ -66,7 +59,7 @@
             android:text="" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/inputPrecio"
             android:layout_width="57dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="140dp"
@@ -83,6 +76,7 @@
 
             android:text="Compra"
             android:textSize="10dp" />
+
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
@@ -102,13 +96,51 @@
 
             android:text="Precio"
             android:textSize="10dp" />
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="215dp"
+            android:layout_marginTop="40dp"
+
+            android:text="VE"
+            android:textSize="10dp" />
 
         <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="210dp"
-            android:text="SKU : " />
+            android:layout_marginStart="285dp"
+            android:layout_marginTop="10dp"
+            android:text="SKU : "
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/inputVe"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="205dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="285dp"
+            android:layout_marginTop="25dp"
+            android:text="V ant: "
+            android:textSize="10dp"/>
+
+        <TextView
+            android:id="@+id/txtVant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="315dp"
+            android:layout_marginTop="25dp"
+            android:text="V ant: "
+            android:textSize="10dp"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
