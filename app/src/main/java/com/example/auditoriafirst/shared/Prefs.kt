@@ -44,6 +44,9 @@ class Prefs(val context:Context) {
         usuario["idCargo"] = storage.getString("idCargo","")!!
         usuario["idTipoDocumento"] = storage.getString("idTipoDocumento","")!!
         usuario["nroDocumento"] = storage.getString("nroDocumento","")!!
+        usuario["medicion"] = storage.getString("medicion","")!!
+        usuario["anio"] = storage.getString("anio","")!!
+        usuario["mes"] = storage.getString("mes","")!!
 
         return usuario
     }

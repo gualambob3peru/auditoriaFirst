@@ -3,14 +3,12 @@ package com.example.auditoriafirst
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.auditoriafirst.adapter.NegocioAdapter
+import com.example.auditoriafirst.components.negocio.NegocioResetDialog
 import com.example.auditoriafirst.data.Database.AuditoriaDb
 import com.example.auditoriafirst.data.Entities.Negocio
 import com.example.auditoriafirst.data.Entities.Producto
@@ -18,6 +16,7 @@ import com.example.auditoriafirst.services.medicion.*
 import com.example.auditoriafirst.services.negocio.NegocioInput
 import com.example.auditoriafirst.services.negocio.NegocioResponse
 import com.example.auditoriafirst.services.negocio.NegocioService
+import com.example.auditoriafirst.shared.UsuarioApplication
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,11 +40,16 @@ class negocio : AppCompatActivity() {
         val negocio_detalle_activity = Intent(this, NegocioDetalle::class.java)
         val negocio_categoria_activity = Intent(this, NegocioCategoria::class.java)
         val agregar_negocio_activity = Intent(this, AgregarNegocioActivity::class.java)
+        val login_activity = Intent(this, MainActivity::class.java)
+        val ocultos_activity = Intent(this, OcultosActivity::class.java)
 
         val btnBuscarNegocio = findViewById<Button>(R.id.btnBuscarNegocio)
         val inputBuscarNegocio = findViewById<EditText>(R.id.inputBuscarNegocio)
         val tMensajeBusqueda = findViewById<TextView>(R.id.tMensajeBusqueda)
-        val btnAgregarNegocio = findViewById<Button>(R.id.btnAgregarNegocio)
+        val btnAgregarNegocio = findViewById<ImageView>(R.id.btnAgregarNegocio)
+        val btnReset = findViewById<ImageView>(R.id.btnReset)
+        val btnMostratOculto = findViewById<ImageView>(R.id.btnMostratOculto)
+        val intento1 = Intent(this, negocio::class.java)
 
         val medicionInput = CategoriaInput(medicion.toString())
 
@@ -77,6 +81,15 @@ class negocio : AppCompatActivity() {
                         var productos = db.ProductoDao().getAllProductos_negocio(miNegocio.codigo_negocio)
                         subirProductos(productos)
                     }
+                }
+
+                adapter.onItemArchivarClick = { miNegocio->
+                    lifecycleScope.launch{
+                        db.NegocioDao().update_archivar(miNegocio.codigo_negocio);
+
+                        intento1.putExtra("medicion", UsuarioApplication.prefs.getUsuario()["medicion"])
+                        startActivity(intento1)
+                    }
 
                 }
 
@@ -90,8 +103,17 @@ class negocio : AppCompatActivity() {
             }
         }
 
+        btnReset.setOnClickListener {
+
+            var dialog = NegocioResetDialog()
+            dialog.show(supportFragmentManager,"ResetDialog")
 
 
+        }
+
+        btnMostratOculto.setOnClickListener {
+            startActivity(ocultos_activity)
+        }
 
         btnBuscarNegocio.setOnClickListener {
             if(inputBuscarNegocio.text.toString().equals("") ){
@@ -131,7 +153,8 @@ class negocio : AppCompatActivity() {
 
                     override fun onFailure(call: Call<NegocioResponse>, t: Throwable) {
                         btnBuscarNegocio.isEnabled= true
-                        TODO(t.toString() + "fff")
+                        Toast.makeText(applicationContext,"Revise su conexión",Toast.LENGTH_SHORT).show()
+                        //TODO(t.toString() + "fff")
                     }
 
                 })
@@ -167,8 +190,9 @@ class negocio : AppCompatActivity() {
                 Toast.makeText(applicationContext,"Productos Enviados",Toast.LENGTH_SHORT).show()
             }
             override fun onFailure(call: Call<ProductoSubirResponse>, t: Throwable) {
+                Toast.makeText(applicationContext,"Revise su conexión",Toast.LENGTH_SHORT).show()
                 //btnBuscarMedicion.isEnabled= true
-                TODO(t.toString() + "fff")
+                //TODO(t.toString() + "fff")
             }
 
         })

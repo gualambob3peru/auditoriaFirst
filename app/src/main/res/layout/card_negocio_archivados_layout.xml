@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/tDescripcionProducto"
-            android:layout_width="193dp"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Hola Hola"
@@ -40,24 +40,16 @@
         </TextView>
 
         <Button
-            android:id="@+id/btnEnviar"
+            android:id="@+id/btnRecuperar"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="4dp"
-            android:backgroundTint="#00BCD4"
-            android:text="Enviar"
-            android:textSize="9dp" />
 
-        <Button
-            android:id="@+id/btnArchivar"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginEnd="5dp"
-            android:layout_toStartOf="@+id/btnEnviar"
-            android:backgroundTint="#3F51B5"
-            android:text="Archivar"
-            android:textSize="9dp" />
+
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#03A9F4"
+            android:text="Recuperar"
+            android:textSize="8dp" />
 
         <TextView
             android:id="@+id/textView14"

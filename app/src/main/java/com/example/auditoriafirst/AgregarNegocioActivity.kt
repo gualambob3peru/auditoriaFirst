@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import com.example.auditoriafirst.data.Database.AuditoriaDb
 import com.example.auditoriafirst.data.Entities.Negocio
+import com.example.auditoriafirst.shared.UsuarioApplication
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -22,12 +23,12 @@ class AgregarNegocioActivity : AppCompatActivity() , AdapterView.OnItemSelectedL
         setContentView(R.layout.activity_agregar_negocio)
         val db = AuditoriaDb(this)
 
-        val btnGuardarNuevoNegocio = findViewById<Button>(R.id.btnGuardarNuevoNegocio)
+        val btnGuardarNuevoNegocio = findViewById<ImageView>(R.id.btnGuardarNuevoNegocio)
         val txtNombre = findViewById<EditText>(R.id.txtNombre)
         val txtDireccion = findViewById<EditText>(R.id.txtDireccion)
         val txtVendedor = findViewById<EditText>(R.id.txtVendedor)
         val txtTelefono = findViewById<EditText>(R.id.txtTelefono)
-
+        val btnAtras = findViewById<ImageView>(R.id.btnAtras)
 
         val intento1 = Intent(this, negocio::class.java)
 
@@ -148,11 +149,16 @@ class AgregarNegocioActivity : AppCompatActivity() , AdapterView.OnItemSelectedL
                 db.NegocioDao().insert(miNegocio)
 
 
-                intento1.putExtra("medicion","2207")
+                intento1.putExtra("medicion", UsuarioApplication.prefs.getUsuario()["medicion"])
                 startActivity(intento1)
             }
 
         }
+        btnAtras.setOnClickListener {
+            intento1.putExtra("medicion", UsuarioApplication.prefs.getUsuario()["medicion"])
+            startActivity(intento1)
+        }
+
     }
 
     override fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {

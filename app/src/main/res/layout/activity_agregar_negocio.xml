@@ -6,16 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".AgregarNegocioActivity">
 
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Agregar Negocio"
-        android:textColor="#000"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Agregar Negocio"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnGuardarNuevoNegocio"
+            android:layout_width="28dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/save" />
+
+
+        <ImageView
+            android:id="@+id/btnAtras"
+            android:layout_width="28dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <EditText
         android:id="@+id/txtNombre"
@@ -62,16 +95,6 @@
         android:text=""
         app:layout_constraintStart_toStartOf="@+id/txtVendedor"
         app:layout_constraintTop_toBottomOf="@+id/txtVendedor" />
-
-    <Button
-        android:id="@+id/btnGuardarNuevoNegocio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="206dp"
-        android:text="Guardar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <Spinner
         android:id="@+id/cboDistrito"

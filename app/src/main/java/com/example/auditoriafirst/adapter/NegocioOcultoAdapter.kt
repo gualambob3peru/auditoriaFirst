@@ -9,12 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.auditoriafirst.R
 import com.example.auditoriafirst.data.Entities.Negocio
 
-class NegocioAdapter:RecyclerView.Adapter<NegocioAdapter.ViewHolder>() {
+class NegocioOcultoAdapter:RecyclerView.Adapter<NegocioOcultoAdapter.ViewHolder>() {
     var codigos : MutableList<String> = mutableListOf()
     var descripcions : MutableList<String> = mutableListOf()
     var buttons : MutableList<String> = mutableListOf()
     var onItemClick: ((Negocio,TextView,TextView) -> Unit)? = null
-    var onItemArchivarClick : ((Negocio) -> Unit)? = null
     var onEnviarClick: ((Negocio) -> Unit)? = null
     var negocios : List<Negocio> = emptyList()
 
@@ -26,7 +25,7 @@ class NegocioAdapter:RecyclerView.Adapter<NegocioAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val v = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_negocio_layout,viewGroup,false)
+        val v = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_negocio_archivados_layout,viewGroup,false)
         return ViewHolder(v)
     }
 
@@ -42,26 +41,18 @@ class NegocioAdapter:RecyclerView.Adapter<NegocioAdapter.ViewHolder>() {
         var itemDescripcion:TextView
         var itemNegocio : Negocio
         var itemButton : Button
-        var itemButtonArchivar : Button
 
         init{
             itemCodigo = itemView.findViewById(R.id.tCodigoProducto)
             itemDescripcion = itemView.findViewById(R.id.tDescripcionProducto)
             itemNegocio = Negocio(0)
-            itemButton = itemView.findViewById(R.id.btnEnviar)
-            itemButtonArchivar = itemView.findViewById(R.id.btnArchivar)
+            itemButton = itemView.findViewById(R.id.btnRecuperar)
 
-            itemView.setOnClickListener {
+            itemButton.setOnClickListener {
                 onItemClick?.invoke(negocios[adapterPosition],itemCodigo,itemDescripcion)
             }
 
-            itemButtonArchivar.setOnClickListener {
-                onItemArchivarClick?.invoke(negocios[adapterPosition])
-            }
 
-            itemButton.setOnClickListener{
-                onEnviarClick?.invoke(negocios[adapterPosition])
-            }
         }
     }
 

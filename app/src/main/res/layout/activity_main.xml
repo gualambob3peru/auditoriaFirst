@@ -11,10 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
+        android:autofillHints="txtEmail"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Correo"
+        android:hint="@string/login_txtcorreo"
         android:text=""
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,8 +39,8 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="63dp"
-        android:text="Ingresar"
-        android:textSize="20dp"
+        android:text="@string/textoLogin"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
 
-        android:text="Ingresar"
+        android:text="@string/textoBotonLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
@@ -66,6 +67,7 @@
         app:layout_constraintHorizontal_bias="0.401"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

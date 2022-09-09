@@ -14,6 +14,12 @@
         android:theme="@style/Theme.AuditoriaFirst"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".OcultosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DialogProducto"
+            android:exported="false" />
+        <activity
             android:name=".AgregarProdDetallesActivity"
             android:exported="false" />
         <activity

@@ -22,7 +22,7 @@ class AgregarCategoriaActivity : AppCompatActivity(), AdapterView.OnItemSelected
         val db = AuditoriaDb(this)
 
         var codigo_negocio = intent.getStringExtra("cod_negocio")
-        val btnGuardarCategoria = findViewById<Button>(R.id.btnGuardarCategoria)
+        val btnGuardarCategoria = findViewById<ImageView>(R.id.btnGuardarCategoria)
         val negocio_categoria_activity = Intent(this, NegocioCategoria::class.java)
         val btnAtras = findViewById<ImageView>(R.id.btnAtras)
 

@@ -23,7 +23,7 @@ class AgregarProductoActivity : AppCompatActivity() {
         val categoria_producto_activity = Intent(this, CategoriaProductoActivity::class.java)
 
         val txtNombreProducto = findViewById<EditText>(R.id.txtNombreProducto)
-        val btnGuardarProducto = findViewById<Button>(R.id.btnGuardarProducto)
+        val btnGuardarProducto = findViewById<ImageView>(R.id.btnGuardarProducto)
         val btnAtras = findViewById<ImageView>(R.id.btnAtras)
 
         btnGuardarProducto.setOnClickListener {
@@ -33,7 +33,7 @@ class AgregarProductoActivity : AppCompatActivity() {
 
                 db.ProductoDao().insert(
                     Producto(
-                        0,"TSKU"+(100000..999999).random(),
+                        0,"TSKU"+(100000..999999).random()+(1000..9999).random(),
                         cod_categoria.toString(),
                         cod_negocio.toString(),
                         txtNombreProducto.text.toString(),

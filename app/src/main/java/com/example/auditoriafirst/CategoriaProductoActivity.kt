@@ -1,36 +1,26 @@
 package com.example.auditoriafirst
 
+import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.auditoriafirst.adapter.CategoriaProductoAdapter
-import com.example.auditoriafirst.adapter.NegocioAdapter
-import com.example.auditoriafirst.adapter.NegocioCategoriaAdapter
+import com.example.auditoriafirst.components.ProductDialog
 import com.example.auditoriafirst.data.Database.AuditoriaDb
-import com.example.auditoriafirst.data.Entities.Categoria
-import com.example.auditoriafirst.data.Entities.Negocio
 import com.example.auditoriafirst.data.Entities.Producto
-import com.example.auditoriafirst.services.medicion.*
-import com.example.auditoriafirst.services.negocio.NegocioCategoriaResponse
-import com.example.auditoriafirst.services.negocio.NegocioInput
-import com.example.auditoriafirst.services.negocio.NegocioService
+import com.example.auditoriafirst.services.medicion.CategoriaProductoInput
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class CategoriaProductoActivity : AppCompatActivity() {
 
     companion object {
-        var listSkus = Array(1) {Array(4) {""} }
+        var listSkus = Array(1) {Array(7) {""} }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +42,10 @@ class CategoriaProductoActivity : AppCompatActivity() {
         val agregar_prod_activity = Intent(this, AgregarProdActivity::class.java)
         val negocio_categoria_activity = Intent(this, NegocioCategoria::class.java)
         val btnAtras = findViewById<ImageView>(R.id.btnAtras)
-
+        val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(applicationContext)
+        var recyclerView = findViewById<RecyclerView>(R.id.recyclerCategoriaProductoView)
+        recyclerView.layoutManager = linearLayoutManager
+        var adapter = CategoriaProductoAdapter()
         lifecycleScope.launch{
             var productos = db.ProductoDao().getAllProductos_categoria(cod_negocio.toString(),codigo_categoria.toString())
 
@@ -63,7 +56,8 @@ class CategoriaProductoActivity : AppCompatActivity() {
 
                 listSkus = Array(productos.size) {Array(7) {""} }
 
-                var misProductos = db.ProductoDao().getAllProductosNego(cod_negocio.toString(),codigo_categoria.toString())
+               var misProductos = db.ProductoDao().getAllProductosNego(cod_negocio.toString(),codigo_categoria.toString())
+
                 for(ind in misProductos.indices){
                     listSkus[ind][0] = misProductos[ind].compra
                     listSkus[ind][1] = misProductos[ind].inventario
@@ -100,7 +94,7 @@ class CategoriaProductoActivity : AppCompatActivity() {
                     listSkus[ind][4] = productos[ind].sku
                 }
 
-                var adapter = CategoriaProductoAdapter()
+
                 adapter.setList(arr_codigo,arr_descripcion,arr_producto)
 
                 adapter.onCompraKey = { position, variable, itemCompra ->
@@ -115,11 +109,47 @@ class CategoriaProductoActivity : AppCompatActivity() {
                 adapter.onVeKey = { position, variable, itemVe ->
                     listSkus[position][variable] = itemVe.text.toString()
                 }
+                /*
+                adapter.onItemClick = { position,tCompra,tInventario,tPrecio,tVant ->
+                    var dialog = ProductDialog(
+                        listSkus[position][4],
+                        cod_negocio.toString(),
+                        codigo_categoria.toString(),
+                        listSkus[position][0],
+                        listSkus[position][1],
+                        listSkus[position][2],
+                        listSkus[position][3])
+                    dialog.show(supportFragmentManager,"customDialog")
+                    dialog.onItemClick = {compra,inventario,precio,vant->
+
+                        lifecycleScope.launch {
+                            db.ProductoDao().update_sku(
+                                listSkus[position][4],
+                                cod_negocio.toString(),
+                                codigo_categoria.toString(),
+                                compra,
+                                inventario,
+                                precio,
+                                vant
+                            )
+
+                            listSkus[position][0] = compra
+                            listSkus[position][1] = inventario
+                            listSkus[position][2] = precio
+                            listSkus[position][3] = vant
+
+                        }
+
+                        tCompra.setText(compra)
+                        tInventario.setText(inventario)
+                        tPrecio.setText(precio)
+                        tVant.setText(vant)
+                        dialog.dismiss()
+                    }
+                }
+                */
 
 
-                val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(applicationContext)
-                var recyclerView = findViewById<RecyclerView>(R.id.recyclerCategoriaProductoView)
-                recyclerView.layoutManager = linearLayoutManager
                 recyclerView.adapter = adapter
 
             }else{
@@ -162,16 +192,7 @@ class CategoriaProductoActivity : AppCompatActivity() {
                        skus[3].toString()
                    );
                }
-
                Toast.makeText(applicationContext,"Productos Guardados", Toast.LENGTH_SHORT).show()
-                /*
-               negocio_categoria_activity.putExtra("cod_negocio",cod_negocio.toString())
-               negocio_categoria_activity.putExtra("descripcion_negocio","")
-
-               startActivity(negocio_categoria_activity)
-               */
-
-
             }
 
 

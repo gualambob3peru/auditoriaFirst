@@ -17,6 +17,7 @@ import com.example.auditoriafirst.services.negocio.NegocioCategoriaResponse
 import com.example.auditoriafirst.services.negocio.NegocioInput
 import com.example.auditoriafirst.services.negocio.NegocioResponse
 import com.example.auditoriafirst.services.negocio.NegocioService
+import com.example.auditoriafirst.shared.UsuarioApplication
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -78,7 +79,7 @@ class NegocioCategoria : AppCompatActivity() {
         }
 
         btnAtras.setOnClickListener {
-            intento1.putExtra("medicion","2207")
+            intento1.putExtra("medicion", UsuarioApplication.prefs.getUsuario()["medicion"])
             startActivity(intento1)
         }
 

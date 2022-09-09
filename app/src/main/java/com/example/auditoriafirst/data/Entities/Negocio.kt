@@ -15,5 +15,6 @@ data class Negocio (
     val distrito : String ="",
     val canal : String ="",
     val nombre : String ="",
-    val estado: String = ""
+    val estado: String = "",
+    val estadoVi : String = "1"
 )

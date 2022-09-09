@@ -3,24 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.225" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/header.xml" value="0.1545" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1325" />
         <entry key="app/src/main/res/layout/activity_agregar_categoria.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/activity_agregar_negocio.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/layout/activity_agregar_prod.xml" value="0.3411458333333333" />
+        <entry key="app/src/main/res/layout/activity_agregar_prod_detalles.xml" value="0.1539855072463768" />
         <entry key="app/src/main/res/layout/activity_agregar_producto.xml" value="0.3446557971014493" />
-        <entry key="app/src/main/res/layout/activity_categoria_producto.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_categoria_producto.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_categoria_productos.xml" value="0.21875" />
+        <entry key="app/src/main/res/layout/activity_dialog_producto.xml" value="0.196875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_medicion.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_negocio.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_negocio_categoria.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_negocio_detalle.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_ocultos.xml" value="0.30978260869565216" />
         <entry key="app/src/main/res/layout/card_categoria_producto_layout.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/card_negocio_archivados_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/card_negocio_categoria_layout.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/card_negocio_layout.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/dialog_negocio_reset.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_dialog_producto.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/header.xml" value="0.2115036231884058" />
+        <entry key="app/src/main/res/layout/modal_producto.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/negocio_reset_dialog.xml" value="0.17346014492753623" />
         <entry key="app/src/main/res/layout/spinner_right_aligned.xml" value="0.3446557971014493" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.305" />

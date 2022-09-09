@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.example.auditoriafirst.CategoriaProductoActivity
 import com.example.auditoriafirst.R
 import com.example.auditoriafirst.data.Entities.Producto
+
 import org.w3c.dom.Text
 
 class CategoriaProductoAdapter:RecyclerView.Adapter<CategoriaProductoAdapter.ViewHolder>() {
@@ -24,36 +27,83 @@ class CategoriaProductoAdapter:RecyclerView.Adapter<CategoriaProductoAdapter.Vie
     var onInventarioKey: ((Int,Int,EditText) -> Unit)? = null
     var onPrecioKey: ((Int,Int,EditText) -> Unit)? = null
     var onVeKey: ((Int,Int,EditText) -> Unit)? = null
+    var onItemClick: ((Int,TextView,TextView,TextView,TextView) -> Unit)? = null
     var productos : List<Producto> = emptyList()
-    var listText : List<EditText> = mutableListOf()
+    var listText : List<TextView> = mutableListOf()
     
     fun setList(miList1: MutableList<String>,miList2: MutableList<String>,miList4:List<Producto>){
         this.codigos = miList1
         this.descripcions = miList2
        // this.buttons = miList3
         this.productos = miList4
+
+
     }
 
-    fun getList(viewHolder: ViewHolder):EditText{
+    fun getList(viewHolder: ViewHolder):TextView{
         return viewHolder.itemCompra
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val v = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_categoria_producto_layout,viewGroup,false)
+
+        /*  val isa = viewGroup.childCount
+        var itemCodigo =  v.findViewById<TextView>(R.id.tCodigoProducto)
+        itemCodigo.text = this.codigos[isa]
+
+        var itemDescripcion =  v.findViewById<TextView>(R.id.tDescripcionProducto)
+        itemDescripcion.text = this.descripcions[isa]
+
+
+
+
+        val mCompra = v.findViewById<TextView>(R.id.inputCompra)
+        if(productos[isa].compra==""){
+            productos[isa].compra="0"
+        }
+        if(productos[isa].inventario==""){
+            productos[isa].inventario="0"
+        }
+        if(productos[isa].precio==""){
+            productos[isa].precio="0"
+        }
+
+        if(productos[isa].ve==""){
+            productos[isa].ve="0"
+        }
+
+        mCompra.setText(productos[isa].compra)
+        val mInventario = v.findViewById<TextView>(R.id.inputInventario)
+        mInventario.setText(productos[isa].inventario)
+        val mPrecio = v.findViewById<TextView>(R.id.inputPrecio)
+        mPrecio.setText(productos[isa].precio)
+        val mve = v.findViewById<TextView>(R.id.inputVe)
+        mve.setText(productos[isa].ve)
+
+        val mVant = v.findViewById<TextView>(R.id.txtVant)
+        mVant.setText(productos[isa].vant)*/
+
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
+        viewHolder.itemProducto = this.productos[i]
         viewHolder.itemCodigo.text = this.codigos[i]
         viewHolder.itemDescripcion.text  = this.descripcions[i]
         viewHolder.itemProducto = this.productos[i]
 
 
+        viewHolder.itemCompra.setText(CategoriaProductoActivity.listSkus[i][0])
+        viewHolder.itemInventario.setText(CategoriaProductoActivity.listSkus[i][1])
+        viewHolder.itemPrecio.setText(CategoriaProductoActivity.listSkus[i][2])
+        viewHolder.itemVe.setText(CategoriaProductoActivity.listSkus[i][3])
 
-            viewHolder.itemCompra.setText(productos[i].compra)
-            viewHolder.itemInventario.setText(productos[i].inventario)
-            viewHolder.itemPrecio.setText(productos[i].precio)
-            viewHolder.itemVe.setText(productos[i].ve)
+     /*   viewHolder.itemCompra.setText(productos[i].compra)
+        viewHolder.itemInventario.setText(productos[i].inventario)
+        viewHolder.itemPrecio.setText(productos[i].precio)
+        viewHolder.itemVe.setText(productos[i].ve)*/
+
+
         viewHolder.itemVant.text = productos[i].vant
 
     }
@@ -67,6 +117,7 @@ class CategoriaProductoAdapter:RecyclerView.Adapter<CategoriaProductoAdapter.Vie
         var itemPrecio : EditText
         var itemVe : EditText
         var itemVant : TextView
+
       //  var itemButton : Button
 
         init{
@@ -80,24 +131,26 @@ class CategoriaProductoAdapter:RecyclerView.Adapter<CategoriaProductoAdapter.Vie
             itemPrecio = itemView.findViewById(R.id.inputPrecio)
             itemVe = itemView.findViewById(R.id.inputVe)
 
-          /*  itemButton.setOnClickListener {
-                onItemClick?.invoke(productos[adapterPosition],itemCodigo,itemDescripcion)
-            }*/
+
+            itemView.setOnClickListener {
+                onItemClick?.invoke(adapterPosition,itemCompra,itemInventario,itemPrecio,itemVe)
+            }
             itemCompra.addTextChangedListener(object : TextWatcher {
+
                 override fun afterTextChanged(s: Editable) {
-                    onCompraKey?.invoke(adapterPosition,0,itemCompra)
+                    onCompraKey?.invoke(adapterPosition,0,itemView.findViewById(R.id.inputCompra))
                 }
                 override fun beforeTextChanged(s: CharSequence, start: Int,
-                                               count: Int, after: Int) {}
+                                               count: Int, after: Int) {
+
+                }
                 override fun onTextChanged(s: CharSequence, start: Int,
-                                           before: Int, count: Int) {}
+                                           before: Int, count: Int) {
+
+                }
             })
 
 
-           /*     .setOnEditorActionListener{ v, keyCode, event ->
-                onCompraKey?.invoke(adapterPosition,0,itemCompra)
-                    true
-            }*/
             itemInventario.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {
                     onInventarioKey?.invoke(adapterPosition,1,itemInventario)
@@ -108,10 +161,7 @@ class CategoriaProductoAdapter:RecyclerView.Adapter<CategoriaProductoAdapter.Vie
                                            before: Int, count: Int) {}
             })
 
-             /*   .setOnEditorActionListener { v, keyCode, event ->
-                onInventarioKey?.invoke(adapterPosition,1,itemInventario)
-                true
-            }*/
+
             itemPrecio.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {
                     onPrecioKey?.invoke(adapterPosition,2,itemPrecio)
@@ -122,10 +172,7 @@ class CategoriaProductoAdapter:RecyclerView.Adapter<CategoriaProductoAdapter.Vie
                                            before: Int, count: Int) {}
             })
 
-               /* .setOnEditorActionListener { v, i, event ->
-                onPrecioKey?.invoke(adapterPosition,2,itemPrecio)
-                true
-            }*/
+
             itemVe.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {
                     onVeKey?.invoke(adapterPosition,3,itemVe)
@@ -136,10 +183,6 @@ class CategoriaProductoAdapter:RecyclerView.Adapter<CategoriaProductoAdapter.Vie
                                            before: Int, count: Int) {}
             })
 
-              /*  .setOnEditorActionListener{ v, keyCode, event ->
-                onVeKey?.invoke(adapterPosition,3,itemVe)
-                true
-            }*/
 
         }
 
