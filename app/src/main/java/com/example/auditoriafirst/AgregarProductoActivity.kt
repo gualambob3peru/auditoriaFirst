@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import com.example.auditoriafirst.data.Database.AuditoriaDb
 import com.example.auditoriafirst.data.Entities.Producto
+import com.example.auditoriafirst.shared.UsuarioApplication
 import kotlinx.coroutines.launch
 
 class AgregarProductoActivity : AppCompatActivity() {
@@ -30,10 +31,13 @@ class AgregarProductoActivity : AppCompatActivity() {
             lifecycleScope.launch{
                 var miNegocio = db.NegocioDao().get_codigo(cod_negocio.toString())
 
+                var em = UsuarioApplication.prefs.getUsuario()["id"]
+                var medd = UsuarioApplication.prefs.getUsuario()["medicion"]
+                var cantProductos = db.ProductoDao().get_count()
 
                 db.ProductoDao().insert(
                     Producto(
-                        0,"TSKU"+(100000..999999).random()+(1000..9999).random(),
+                        0,"S"+em+medd+cantProductos+(100..999).random(),
                         cod_categoria.toString(),
                         cod_negocio.toString(),
                         txtNombreProducto.text.toString(),

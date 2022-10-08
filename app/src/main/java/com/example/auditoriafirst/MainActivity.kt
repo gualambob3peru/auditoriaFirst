@@ -58,11 +58,16 @@ class MainActivity : AppCompatActivity() {
 
                         if (usuario != null) {
                             if(usuario.error.equals("0")){
+                                tmensaje.text = "Download data..."
+
+
+
                                 lifecycleScope.launch{
                                     var Produ = db.ProductoMasterDao().getCount()
                                     if(Produ==0){
                                         var serviceTodo = TodoService.create()
                                         var apiInterfaceTodo = serviceTodo.get()
+
 
                                         apiInterfaceTodo.enqueue( object : Callback<TodoResponse>
                                         {
@@ -70,6 +75,8 @@ class MainActivity : AppCompatActivity() {
                                                 call: Call<TodoResponse>,
                                                 response: Response<TodoResponse>
                                             ) {
+                                                tmensaje.text = "ENTRANDO PRODUC"
+
                                                 lifecycleScope.launch{
                                                     var todo = response.body()
                                                     if (todo != null) {
@@ -174,6 +181,9 @@ class MainActivity : AppCompatActivity() {
                                                         botonLogin.isEnabled= true
                                                         intento1.putExtra("medicion", prefs.getUsuario()["medicion"])
                                                         startActivity(intento1)
+                                                    }else{
+                                                        tmensaje.text = "Conexion, Intente nuevamente"
+                                                        botonLogin.isEnabled= true
                                                     }
 
                                                 }
@@ -199,10 +209,16 @@ class MainActivity : AppCompatActivity() {
                                 }
 
 
+
+
                             }else if(usuario.error.equals("1")){
                                 tmensaje.text = usuario.message
+                                botonLogin.isEnabled= true
                             }
 
+                        }else {
+                            tmensaje.text = "Verifique sus credenciales"
+                            botonLogin.isEnabled= true
                         }
 
 

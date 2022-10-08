@@ -134,9 +134,13 @@ class AgregarNegocioActivity : AppCompatActivity() , AdapterView.OnItemSelectedL
                 var miDistri = db.DistritoDao().get_descripcion(distriValor)
                 var cod_cad_distrito = miDistri.codigo
 
+                var em = UsuarioApplication.prefs.getUsuario()["id"]
+                var medd = UsuarioApplication.prefs.getUsuario()["medicion"]
+                var cantNegocios = db.NegocioDao().get_count()
+
                 var miNegocio = Negocio(
                     0,
-                    "T"+(100000..999999).random(),
+                    "T"+em+medd+cantNegocios+(1000..9999).random(),
                     txtDireccion.text.toString(),
                     txtVendedor.text.toString(),
                     txtTelefono.text.toString(),

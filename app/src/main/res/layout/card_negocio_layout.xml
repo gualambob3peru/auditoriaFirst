@@ -20,7 +20,7 @@
             android:id="@+id/tCodigoProducto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="55dp"
 
             android:text="2020-05-25"
             android:textColor="@color/black"

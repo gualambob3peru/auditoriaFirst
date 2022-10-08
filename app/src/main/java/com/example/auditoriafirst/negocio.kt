@@ -79,7 +79,8 @@ class negocio : AppCompatActivity() {
                 adapter.onEnviarClick = {miNegocio ->
                     lifecycleScope.launch{
                         var productos = db.ProductoDao().getAllProductos_negocio(miNegocio.codigo_negocio)
-                        subirProductos(productos)
+                        var elNegocio = db.NegocioDao().get_codigo(miNegocio.codigo_negocio)
+                        subirProductos(productos,elNegocio)
                     }
                 }
 
@@ -168,12 +169,23 @@ class negocio : AppCompatActivity() {
 
     }
 
-    private fun subirProductos(productos: List<Producto>) {
+    private fun subirProductos(productos: List<Producto>, miNegocio: Negocio) {
         var datosSubida = mutableMapOf<String,String>()
         datosSubida["email"] = usuario["email"].toString()
         datosSubida["medicion"] = prefs.getUsuario()["medicion"].toString()
         datosSubida["anio"] = prefs.getUsuario()["anio"].toString()
         datosSubida["mes"] = prefs.getUsuario()["mes"].toString()
+        datosSubida["cod_negocio"] = miNegocio.codigo_negocio
+        datosSubida["direccion_negocio"] = miNegocio.descripcion
+        datosSubida["nombre_negocio"] = miNegocio.nombre
+        datosSubida["telefono_negocio"] = miNegocio.telefono
+        datosSubida["vendedor_negocio"] = miNegocio.vendedor
+
+        datosSubida["cod_zona"] = miNegocio.zona
+        datosSubida["cod_canal"] = miNegocio.canal
+        datosSubida["cod_distrito"] = miNegocio.distrito
+
+
 
 
         val productoSubirInput = ProductoSubirInput(productos,datosSubida)

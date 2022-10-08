@@ -20,8 +20,8 @@
             android:id="@+id/tCodigoProducto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="315dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="60dp"
             android:text="2020-05-25"
             android:textColor="@color/black"
             android:textSize="11dp">
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="62dp"
+            android:layout_marginTop="75dp"
             android:text="Hola Hola"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -114,8 +114,8 @@
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="285dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="60dp"
             android:text="SKU : "
             android:textSize="11dp" />
 

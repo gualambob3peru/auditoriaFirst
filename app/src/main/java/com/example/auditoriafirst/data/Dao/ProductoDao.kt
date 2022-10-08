@@ -23,6 +23,9 @@ interface ProductoDao {
     @Query("SELECT * from Producto WHERE id = :id")
     suspend fun get(id: Int): Producto
 
+    @Query("SELECT count(*) from Producto" )
+    suspend fun get_count(): String
+
     @Query("SELECT * from Producto WHERE cod_negocio = :cod_negocio AND cod_categoria = :cod_categoria  AND sku!=''")
     suspend fun getAllProductos_categoria(cod_negocio:String , cod_categoria:String ): List<Producto>
 

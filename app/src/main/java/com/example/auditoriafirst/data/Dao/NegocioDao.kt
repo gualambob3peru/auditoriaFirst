@@ -21,6 +21,9 @@ interface NegocioDao {
     @Query("SELECT * from Negocio WHERE estadoVi = 2")
     suspend fun get_ocultos(): List<Negocio>
 
+    @Query("SELECT count(*) from Negocio" )
+    suspend fun get_count(): String
+
     @Query("UPDATE  Negocio set estadoVi=1 WHERE codigo_negocio= :cod_negocio")
     suspend fun update_recuperar(cod_negocio:String)
 
